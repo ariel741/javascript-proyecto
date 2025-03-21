@@ -1,111 +1,77 @@
-function login(){
-    let intento = 0
-    let identificar = true
-
-    do{
-        let username = prompt("Ingrese el nombre de usuario")
-
-        while(username == "" || username == null){
-            username = prompt("ingrese un Nombre de usuaro valido")
-
-            intento++
-            if(intento >= 3){
-                alert("supero el limite de intentos")
-                break
-            }
-
-        }
-        identificar = false
-
-        if(username != "" && username != null){
-            alert("Bienvenido nuevamente " + username)
-        }
-    }while(identificar)
-
-
-
+function Turno(name, age, raza, date) {
+    this.name = name;
+    this.age = age;
+    this.raza = raza;
+    this.date = date;
 }
 
-login()
+let turnos = [];
 
+function agregarTurno() {
+    let name = prompt("Ingrese el nombre del perro:");
+    let age = prompt("Ingrese la edad del perro:");
+    let raza = prompt("Ingrese la raza del perro:");
+    let date = prompt("Ingrese la fecha del turno (YYYY-MM-DD):");
+    
+    let nuevoTurno = new Turno(name, age, raza, date);
+    turnos.push(nuevoTurno);
+    alert("Turno agregado exitosamente!");
+}
 
-//var mala practica de usar
+function cancelarTurno() {
+    let name = prompt("Ingrese el nombre del perro para cancelar el turno:");
+    let date = prompt("Ingrese la fecha del turno a cancelar (YYYY-MM-DD):");
+    
+    let indice = turnos.findIndex(turno => turno.name === name && turno.date === date);
+    
+    if (indice !== -1) {
+        turnos.splice(indice, 1);
+        alert("Turno cancelado exitosamente!");
+    } else {
+        alert("No se encontró un turno con esos datos.");
+    }
+}
 
-//let indica que voy a inicializar una variable
+function consultarPrecio() {
+    alert("El precio del lavado es $5000");
+}
 
-/*
-= asigna valores     let numero = 1
+function buscarTurno() {
+    let name = prompt("Ingrese el nombre del perro para buscar su turno:");
+    let turnoEncontrado = turnos.find(turno => turno.name === name);
+    
+    if (turnoEncontrado) {
+        alert("Turno encontrado: " + turnoEncontrado.name + ", Fecha: " + turnoEncontrado.Turno);
+    } else {
+        alert("No se encontró un turno para ese perro.");
+    }
+}
 
-== compara valores   1==1 = true
+// Menú de opciones
+function menu() {
+    let opcion;
+    do {
+        opcion = prompt("¿Qué desea hacer?: 1. Agregar turno 2. Cancelar turno 3. Consultar precio del lavado 4. Buscar turno 5. Salir");
+        switch (opcion) {
+            case "1":
+                agregarTurno();
+                break;
+            case "2":
+                cancelarTurno();
+                break;
+            case "3":
+                consultarPrecio();
+                break;
+            case "4":
+                buscarTurno();
+                break;
+            case "5":
+                alert("Gracias por usar el servicio de lavadero de perros!");
+                break;
+            default:
+                alert("Opción no válida, intente de nuevo.");
+        }
+    } while (opcion !== "5");
+}
 
-=== compara valores y tipo de dato 1==="1" false (uno es int y el otro es string)
-*/
-
-/*prompt nos da una entrada de teclado donde podemos almacenar algo, cualquier ingreso por teclado va a ser
-un string por lo que
-si se pide un numero se va a tener que hacer parseInt()*/
-
-//con las comillas se convierte en un string
-
-//parseInt convierte a cualquier string que se pueda a un numero entero parseInt("loQueSeQuieraConvertir")
-
-
-//---------------------------------------------------------------------------------------------------------------------------------------
-
-// const pi = 3.14
-
-// let numero1 = parseInt(prompt("ingrese el primer numero"))
-
-// let numero2 = parseInt(prompt("ingrese el segundo numero"))
-
-// let resultado = numero1 + parseInt(numero2)
-
-// if(numero1 > numero2){
-//     alert("el primer numero ingresado es el mayor")
-// }else{
-//     alert("el numero 2 es mayor al numero 1")
-// }
-
-// variable = confirm("pregunta") -- el confirm hace saltar un cartel de aceptar o cancelar
-
-//---------------------------------------------------------------------------------------------------------------------------------------
-
-
-// let nombre = prompt("ingrese un nombre")
-// let apellido = prompt("ingrese su apellido")
-
-// if(apellido == "" || apellido != String || apellido == null)
-// {
-//     apellido = prompt("ingrese el apellido  nuevamente")
-// }
-// else{
-//     if(apellido =="mende"){
-//         alert("hola mende")
-//     }else if(apellido=="perez"){
-//         alert("hola perez")
-//     }
-// }
-
-
-// ---------------FUNCIONES---------------------------
-
-// SINTAXIS: function nombreDeFuncion(){lo que hace la funcion }
-
-// function saludar(){
-//     let nombre = prompt("ingrese su nombre")
-//     alert("hola "+ nombre)
-// }
-
-// saludar()
-
-// alert("El resultado de la suma de ambosu numeros es " + resultado);
-
-// alert(`El resultado de la suma de ambos numeros es: ${resultado}`);
-
-
-
-
-
-
-
-
+menu();
